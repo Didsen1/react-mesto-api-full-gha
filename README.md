@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 84.201.159.80
 
-Frontend https://...
+Frontend https://didsen1.students.nomoredomainsrocks.ru
 
-Backend https://...
+Backend https://api.didsen1.students.nomo.nomoredomainsrocks.ru
