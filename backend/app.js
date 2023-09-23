@@ -11,11 +11,11 @@ const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 
-const URL = 'mongodb://127.0.0.1:27017/mestodb';
-const { PORT = 3000 } = process.env;
+const { PORT, DATABASE } = process.env;
+const { DEFAULT_PORT, DEFAULT_DATABASE } = require('./utils/other');
 
 mongoose.set('strictQuery', true);
-mongoose.connect(URL);
+mongoose.connect(DATABASE || DEFAULT_DATABASE);
 
 const app = express();
 
@@ -33,4 +33,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT);
+app.listen(PORT || DEFAULT_PORT);
