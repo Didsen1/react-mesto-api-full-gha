@@ -1,0 +1,15 @@
+.element__caption-button {
+    cursor: pointer;
+    min-width: 22px;
+    height: 19px;
+    border: 0;
+    background-color: white;
+    background-image: url(../../../images/like.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+}
+
+.element__caption-button:hover {
+    opacity: 0.6;
+}

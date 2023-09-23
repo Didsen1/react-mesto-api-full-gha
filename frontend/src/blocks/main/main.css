@@ -1,0 +1,28 @@
+.main {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: calc(1280px - 31.25%);
+    max-width: 880px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .main {
+        width: calc(1024px - 31.25%);
+        max-width: 710px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .main {
+        width: calc(720px - 31.25%);
+        max-width: 495px;
+    }
+}
+
+@media screen and (max-width:  520px) {
+    .main {
+        width: calc(320px - 19px * 2);
+    }
+}

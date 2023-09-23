@@ -1,0 +1,13 @@
+.popup__form-label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+}
+
+.popup__form-label:first-of-type {
+    margin: 12px 0 0 0;
+}
+
+.popup__form-label:last-of-type {
+    margin: 0 0 21px 0;
+}
