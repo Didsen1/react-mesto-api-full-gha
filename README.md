@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.201.159.80
+IP 158.160.53.34
 
 Frontend https://didsen1.students.nomoredomainsrocks.ru
 
