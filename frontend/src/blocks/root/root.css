@@ -1,0 +1,10 @@
+.root {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    max-width: 1280px;
+    margin: 0 auto;
+}
