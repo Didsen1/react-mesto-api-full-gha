@@ -28,56 +28,6 @@ function getCards(req, res, next) {
     .catch(next);
 }
 
-function setLikeCard(req, res, next) {
-  const { cardId } = req.params;
-  const { userId } = req.user;
-
-  Card
-    .findByIdAndUpdate(
-      cardId,
-      {
-        $addToSet: {
-          likes: userId,
-        },
-      },
-      {
-        new: true,
-      },
-    )
-    .then((card) => {
-      if (card) return res.send({ data: card });
-
-      throw new NotFoundError('Карточка с указанным id не найдена');
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new InaccurateDataError('Переданы некорректные данные при добавлении лайка карточке'));
-      } else {
-        next(err);
-      }
-    });
-}
-
-function unsetLikeCard(req, res, next) {
-  const { cardId } = req.params;
-  const { userId } = req.user;
-
-  Card
-    .findByIdAndUpdate(cardId, { $pull: { likes: userId } }, { new: true })
-    .then((card) => {
-      if (card) return res.send({ data: card });
-
-      throw new NotFoundError('Данные по указанному id не найдены');
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new InaccurateDataError('Переданы некорректные данные при снятии лайка карточки'));
-      } else {
-        next(err);
-      }
-    });
-}
-
 function deleteCard(req, res, next) {
   const { cardId } = req.params;
   const { userId } = req.user;
@@ -90,9 +40,38 @@ function deleteCard(req, res, next) {
       const { owner: cardOwnerId } = card;
       if (cardOwnerId.valueOf() !== userId) throw new ForbiddenError('Нет прав доступа');
 
-      Card.deleteOne(card).then(() => res.status(200).send({ data: card })).catch(next);
+      Card.remove(card).then(() => res.status(200).send({ data: card })).catch(next);
     })
     .catch(next);
+}
+
+function updateCardData(req, res, next, updateOptions) {
+  const { cardId } = req.params;
+
+  Card
+    .findByIdAndUpdate(cardId, updateOptions, { new: true })
+    .then((card) => {
+      if (card) return res.send({ data: card });
+
+      throw new NotFoundError('Карточка с указанным id не найдена');
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new InaccurateDataError('Переданы некорректные данные при изменении лайка карточке'));
+      } else {
+        next(err);
+      }
+    });
+}
+
+function setLikeCard(req, res, next) {
+  const { userId } = req.user;
+  updateCardData(req, res, next, { $addToSet: { likes: userId } });
+}
+
+function unsetLikeCard(req, res, next) {
+  const { userId } = req.user;
+  updateCardData(req, res, next, { $pull: { likes: userId } });
 }
 
 module.exports = {
